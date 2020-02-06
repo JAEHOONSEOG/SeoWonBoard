@@ -122,16 +122,12 @@
     		<artifactId>postgresql</artifactId>
     		<version>42.2.5</version>
 		</dependency>
-<<<<<<< HEAD
 		<!-- mysql -->
 		<dependency>
     		<groupId>mysql</groupId>
     		<artifactId>mysql-connector-java</artifactId>
     		<version>8.0.15</version>
 		</dependency>
-=======
-		
->>>>>>> a1dc3580fdddd3a52ac39ade247dd182594b3407
 		<!-- Mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>

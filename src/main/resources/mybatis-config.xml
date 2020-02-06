@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
  <configuration>
 	<typeAliases>
-		<!-- mapper.xml에서 parameterType, resultType 입력 시 'org.zerock.domain'생략 가능  -->
-		<!-- <package name="org.zerock.domain"/> -->
+		<!-- mapper.xml에서 parameterType, resultType 입력 시 'com.sewon.domain'생략 가능  -->
+		<package name="com.seowon.domain"/>
 	</typeAliases> 
  </configuration> 
