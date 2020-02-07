@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,8 +63,13 @@
           <hr>
           <div class="form-group">
             <h3 class="mt-4">Title</h3>
-            <textarea class="form-control" name="title" rows="1"></textarea>
+            <textarea class="form-control" name="title" rows="1">${boardVO.title}</textarea>
           </div>
+
+          <hr>
+
+          <!-- Date/Time -->
+          <p>Posted on <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.regDate}" /></p>
 
           <hr>
 
@@ -74,16 +80,17 @@
 
           <!-- Post Content -->
           <h3 class="mt-4">Content</h3>
-          <textarea class="form-control" name="content" rows="8"></textarea>
+          <textarea class="form-control" name="content" rows="8">${boardVO.content}</textarea>
 
           <hr>
           
           <h3 class="mt-4">writer</h3>
-          <input type="text" class="form-control" name="writer">
+          <input type="text" class="form-control" name="writer" value="${boardVO.writer}">
           
           <hr>
           
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-warning">Cancel</button>
           <br><br>
         </div>
         
@@ -166,5 +173,22 @@
   <script src="../../../resources/vendor/jquery/jquery.min.js"></script>
   <script src="../../../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+  <script>
+    $(document).ready(function(){
+
+        var formObj = $("form[role='form']");
+
+        console.log(formObj);
+
+        $(".btn-primary").on("click", function(){
+          formObj.submit();        	
+        });
+        
+        $(".btn-warning").on("click", function(){
+          self.location = "/board/listAll";
+        });
+    });
+  </script>
+   
 </body>
 </html>
