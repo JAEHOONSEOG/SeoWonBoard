@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,10 +52,18 @@ public class BoardController {
 		model.addAttribute("list", service.listAll());
 	}
 	
-	@RequestMapping(value="/read", method=RequestMethod.GET)
-	public void read(@RequestParam("bno") int bno, Model model) throws Exception{
+//	@RequestMapping(value="/read", method=RequestMethod.GET)
+//	public void read(@RequestParam("bno") int bno, Model model) throws Exception{
+//		model.addAttribute(service.read(bno));
+//	}
+	
+	@RequestMapping(value="/readPage", method=RequestMethod.GET)
+	public void read(@RequestParam("bno") int bno,
+			         @ModelAttribute("cri") Criteria cri,
+			         Model model) throws Exception {
+		// 'page' and 'perPageNum' is included in Criteria  
 		model.addAttribute(service.read(bno));
-	}
+	} 
 	
 	@RequestMapping(value="/modify", method=RequestMethod.GET)
 	public void modifyGET(int bno, Model model) throws Exception {
@@ -86,15 +95,15 @@ public class BoardController {
 		model.addAttribute("list", service.listCriteria(cri));
 	}
 	
-	@RequestMapping(value="listPage", method=RequestMethod.GET)
-	public void listPage(Criteria cri, Model model) throws Exception {
+	@RequestMapping(value="/listPage", method=RequestMethod.GET)
+	public void listPage(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
 		logger.info(cri.toString());
 		
 		model.addAttribute("list", service.listCriteria(cri));
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(131);
-		
+		pageMaker.setTotalCount(service.listCountCriteria(cri));
+	
 		model.addAttribute("pageMaker", pageMaker);
 	}
 }

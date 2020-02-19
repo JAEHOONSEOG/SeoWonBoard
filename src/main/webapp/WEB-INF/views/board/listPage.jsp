@@ -26,8 +26,8 @@
   <script>
     var result = '${msg}';
     if(result == "success")
-      alert("The process is completed")
     {
+      alert("The process is completed");
         }
   </script>
 
@@ -78,7 +78,9 @@
             <div class="card-body">
               <h2 class="card-title">${boardVO.bno}.  ${boardVO.title}</h2>
               <p class="card-text">${boardVO.content}</p>
-              <a href="/board/read?bno=${boardVO.bno}" class="btn btn-primary">Read More &rarr;</a>
+              <%-- <a href="/board/read?bno=${boardVO.bno}" class="btn btn-primary">Read More &rarr;</a> --%>
+              <a href="/board/readPage${pageMaker.makeQuery(pageMaker.cri.page)}&bno=${boardVO.bno }"
+               class="btn btn-primary">Read More &rarr;</a>
             </div>
             <div class="card-footer text-muted">
               Posted on <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.regDate}" />
@@ -91,19 +93,22 @@
         <ul class="pagination justify-content-center mb-4">
           <c:if test="${pageMaker.prev}">
             <li class="page-item">
-              <a class="page-link" href="listPage?page=${pageMaker.startPage - 1}">&larr; Older</a>
+              <%-- <a class="page-link" href="listPage?page=${pageMaker.startPage - 1}">&larr; Older</a> --%>
+              <a class="page-link" href="listPage${pageMaker.makeQuery(pageMaker.startPage - 1) }">&larr; Older</a>
             </li>
           </c:if>
           
           <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-            <li class="page-item"
-              <c:out value="${pageMaker.cri.page == idx?'class=active' : ''  }"/>>
-              <a class="page-link" href="listPage?page=${idx}">${idx}</a>
+            <li class="page-item <c:out value="${pageMaker.cri.page == idx?'active' : ''  }"/>">
+              <%-- <a class="page-link" href="listPage?page=${idx}">${idx}</a> --%>
+              <a class="page-link" href="listPage${pageMaker.makeQuery(idx) }">${idx}</a>
+            </li>  
           </c:forEach>
           
           <c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
             <li class="page-item">
-              <a class="page-link" href="listPage?page=${pageMaker.endPage + 1 }">Newer &rarr;</a>
+              <%-- <a class="page-link" href="listPage?page=${pageMaker.endPage + 1 }">Newer &rarr;</a> --%>
+              <a class="page-link" href="listPage${pageMaker.makeQuery(pageMaker.endPage + 1) }">Newer &rarr;</a>
             </li>
           </c:if>
         </ul>

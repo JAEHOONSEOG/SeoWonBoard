@@ -1,5 +1,8 @@
 package com.seowon.domain;
 
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class PageMaker {
 
 	private int totalCount;
@@ -28,8 +31,11 @@ public class PageMaker {
 		calcData();
 	}
 	
+	/* 
+	 * Calculate pages
+	 * */
 	private void calcData() {
-		endPage = (int)(Math.ceil(cri.getPage())/(double)displayPageNum)*displayPageNum;
+		endPage = (int)(Math.ceil(cri.page/(double)displayPageNum))*displayPageNum;
 		
 		startPage = (endPage - displayPageNum) + 1;
 		
@@ -42,6 +48,15 @@ public class PageMaker {
 		prev = startPage == 1 ? false : true;
 		
 		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
+	}
+	
+	public String makeQuery(int page) {
+		UriComponents uriComponents =
+				UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPageNum", cri.getPerPageNum())
+				.build();
+		return uriComponents.toUriString();
 	}
 	
 	public int getStartPage() {
