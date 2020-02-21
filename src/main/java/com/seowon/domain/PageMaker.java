@@ -50,11 +50,23 @@ public class PageMaker {
 		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
 	}
 	
-	public String makeQuery(int page) {
+	// Create query string for URI for paging process 
+//	public String makeQuery(int page) {
+//		UriComponents uriComponents =
+//				UriComponentsBuilder.newInstance()
+//				.queryParam("page", page)
+//				.queryParam("perPageNum", cri.getPerPageNum())
+//				.build();
+//		return uriComponents.toUriString();
+//	}
+	// Create query string for URI for paging process
+	public String makeSearch(int page) {
 		UriComponents uriComponents =
 				UriComponentsBuilder.newInstance()
 				.queryParam("page", page)
 				.queryParam("perPageNum", cri.getPerPageNum())
+				.queryParam("searchType", ((SearchCriteria)cri).getSearchType())
+				.queryParam("keyword", ((SearchCriteria)cri).getKeyword())
 				.build();
 		return uriComponents.toUriString();
 	}
