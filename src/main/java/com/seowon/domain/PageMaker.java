@@ -51,14 +51,15 @@ public class PageMaker {
 	}
 	
 	// Create query string for URI for paging process 
-//	public String makeQuery(int page) {
-//		UriComponents uriComponents =
-//				UriComponentsBuilder.newInstance()
-//				.queryParam("page", page)
-//				.queryParam("perPageNum", cri.getPerPageNum())
-//				.build();
-//		return uriComponents.toUriString();
-//	}
+	public String makeQuery(int page) {
+		UriComponents uriComponents =
+				UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPageNum", cri.getPerPageNum())
+				.build();
+		return uriComponents.toUriString();
+	}
+	
 	// Create query string for URI for paging process
 	public String makeSearch(int page) {
 		UriComponents uriComponents =

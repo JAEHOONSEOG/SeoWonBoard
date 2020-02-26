@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ page session="false" %>
+<%@ page session="false" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +12,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Blog Home - Start Bootstrap Template</title>
+  <title>Blog Post - Start Bootstrap Template</title>
 
   <!-- Bootstrap core CSS -->
   <link href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -23,13 +23,6 @@
 </head>
 
 <body>
-  <script>
-    var result = '${msg}';
-    if(result == "success")
-    {
-      alert("The process is completed");
-        }
-  </script>
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -64,55 +57,98 @@
 
     <div class="row">
 
-      <!-- Blog Entries Column -->
-      <div class="col-md-8">
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
 
-        <h1 class="my-4">Page Heading
-          <small>Secondary Text</small>
-        </h1>
+        <form role="form" method="post">
+          <input type="hidden" name="bno" value="${boardVO.bno}">
+        </form>
+        
+        <!-- Title -->
+        <h1 class="mt-4">${boardVO.title}</h1>
 
-        <c:forEach items="${list}" var="boardVO">
-          <!-- Blog Post -->
-          <div class="card mb-4">
-            <!-- <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap"> -->
-            <div class="card-body">
-              <h2 class="card-title">${boardVO.bno}.  ${boardVO.title}</h2>
-              <p class="card-text">${boardVO.content}</p>
-              <%-- <a href="/board/read?bno=${boardVO.bno}" class="btn btn-primary">Read More &rarr;</a> --%>
-              <a href="/sboard/readPage${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${boardVO.bno }"
-               class="btn btn-primary">Read More &rarr;</a>
+        <!-- Author -->
+        <p class="lead">
+          by
+          <a href="#">${boardVO.writer}</a>
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>Posted on <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.regDate}" /></p>
+
+        <hr>
+
+        <!-- Preview Image -->
+        <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+
+        <hr>
+
+        <!-- Post Content -->
+        <p class="lead">${boardVO.content}</p>
+
+        <hr>
+        
+        <form role="form" action="modifyPage" method="post">
+          <input type="hidden" name="bno" value="${boardVO.bno }">
+          <input type="hidden" name="page" value="${cri.page }">
+          <input type="hidden" name="perPageNum" value="${cri.perPageNum }">
+          <input type="hidden" name="searchType" value="${cri.searchType}">
+          <input type="hidden" name="keyword" value="${cri.keyword }">
+          <button type="submit" class="btn btn-warning">Modify</button>
+          <button type="submit" class="btn btn-danger">Remove</button>
+          <button type="submit" class="btn btn-primary">List All</button>
+        </form>
+        
+        <hr>
+
+        <!-- Comments Form -->
+        <div class="card my-4">
+          <h5 class="card-header">Leave a Comment:</h5>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <textarea class="form-control" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Single Comment -->
+        <div class="media mb-4">
+          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+          <div class="media-body">
+            <h5 class="mt-0">Commenter Name</h5>
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+          </div>
+        </div>
+
+        <!-- Comment with nested comments -->
+        <div class="media mb-4">
+          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+          <div class="media-body">
+            <h5 class="mt-0">Commenter Name</h5>
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+
+            <div class="media mt-4">
+              <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+              <div class="media-body">
+                <h5 class="mt-0">Commenter Name</h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+              </div>
             </div>
-            <div class="card-footer text-muted">
-              Posted on <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.regDate}" />
-              by <a href="#">${boardVO.writer}</a>
+
+            <div class="media mt-4">
+              <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+              <div class="media-body">
+                <h5 class="mt-0">Commenter Name</h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+              </div>
             </div>
           </div>
-        </c:forEach>
-
-        <!-- Pagination -->
-        <ul class="pagination justify-content-center mb-4">
-          <c:if test="${pageMaker.prev}">
-            <li class="page-item">
-              <%-- <a class="page-link" href="listPage?page=${pageMaker.startPage - 1}">&larr; Older</a> --%>
-              <a class="page-link" href="listPage${pageMaker.makeSearch(pageMaker.startPage - 1) }">&larr; Older</a>
-            </li>
-          </c:if>
-          
-          <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-            <li class="page-item <c:out value="${pageMaker.cri.page == idx?'active' : ''  }"/>">
-              <%-- <a class="page-link" href="listPage?page=${idx}">${idx}</a> --%>
-              <a class="page-link" href="listPage${pageMaker.makeSearch(idx) }">${idx}</a>
-            </li>  
-          </c:forEach>
-          
-          <c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
-            <li class="page-item">
-              <%-- <a class="page-link" href="listPage?page=${pageMaker.endPage + 1 }">Newer &rarr;</a> --%>
-              <a class="page-link" href="listPage${pageMaker.makeSearch(pageMaker.endPage + 1) }">Newer &rarr;</a>
-            </li>
-          </c:if>
-        </ul>
-
+        </div>
       </div>
 
       <!-- Sidebar Widgets Column -->
@@ -167,7 +203,6 @@
               <h7><a href="/sboard/register">New Article</a></h7>
             </div>
           </div>
-        </div>
 
         <!-- Categories Widget -->
         <div class="card my-4">
@@ -218,6 +253,7 @@
     <!-- /.row -->
 
   </div>
+  </div>
   <!-- /.container -->
 
   <!-- Footer -->
@@ -232,16 +268,44 @@
   <script src="../../../resources/vendor/jquery/jquery.min.js"></script>
   <script src="../../../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <script>
+    <script>
     $(document).ready(function(){
-      $(".btn-secondary").on("click", function(event){
-          self.location = "list"
-              + "${pageMaker.makeQuery(1)}"
-              + "&searchType="
-              + $("select option:selected").val()
-              + "&keyword=" + $("#keywordInput").val();
-      });
+
+        var formObj = $("form[role='form']");
+
+        console.log(formObj);
+
+        /* $(".btn-warning").on("click", function(){
+          formObj.attr("action", "/board/modify");
+          formObj.attr("method", "get");
+          formObj.submit();
+        }); */
+        
+        $(".btn-warning").on("click", function(){
+            formObj.attr("action", "/sboard/modifyPage");
+            formObj.attr("method", "get");
+            formObj.submit();
+          });
+
+        $(".btn-danger").on("click", function(){
+
+          formObj.attr("method", "post");
+          formObj.attr("action", "/sboard/removePage");
+          /* formObj.attr("action", "/board/remove"); */
+          formObj.submit();
+        });
+
+        /* $(".btn-primary").on("click", function(){
+            self.location = "/board/listAll";
+          }); */
+
+        $(".btn-primary").on("click", function(){
+          formObj.attr("method", "get");
+          formObj.attr("action", "/sboard/list");
+          formObj.submit();
+        });
     });
   </script>
+
 </body>
 </html>
