@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.seowon.mapper.ReplyMapper">
+  <select id="list" resultType="replyVO">
+    select 
+      *
+    from
+      seowonhm.tsn_reply
+    where
+      bno = #{bno}
+    order by rno desc
+  </select>
+  
+  <insert id="create">
+    insert into seowonhm.tsn_reply(bno, rno, replytext, replyer)
+    values(#{bno}, #{rno}, #{replyText}, #{replyer})
+  </insert>
+  
+  <update id="update">
+    update seowonhm.tsn_reply 
+    set replytext=#{replyText}, updatedate=now()
+    where rno = #{rno}
+  </update>
+  
+  <delete id="delete">
+    delete from seowonhm.tsn_reply where rno = #{rno}
+  </delete>
+  
+  <select id="listPage" resultType="ReplyVO">
+    select
+      *
+    from 
+      seowonhm.tsn_reply
+    where
+      bno = #{bno}
+    order by rno desc
+    limit #{cri.pageStart}, #{cri.perPageNum}
+  </select>
+  
+  <select id="count" resultType="int">
+    select count(bno) from seowonhm.tsn_reply where bno = #{bno}
+  </select>
+</mapper>

@@ -19,3 +19,15 @@ create table seowonhm.tsn_board (
  viewcnt INT DEFAULT 0,
  PRIMARY KEY (bno)
 );
+
+-- reply Table
+create table seowonhm.tsn_reply (
+ rno INT NOT NULL AUTO_INCREMENT,
+ bno INT NOT NULL DEFAULT 0,
+ replytext VARCHAR(1000) NOT NULL,
+ replyer VARCHAR(50) NOT NULL,
+ regdate TIMESTAMP NOT NULL DEFAULT NOW(),
+ updatedate TIMESTAMP NOT NULL DEFAULT NOW(),
+ PRIMARY KEY(rno),
+ CONSTRAINT fk_board FOREIGN KEY(bno) references seowonhm.tsn_board(bno)
+);
