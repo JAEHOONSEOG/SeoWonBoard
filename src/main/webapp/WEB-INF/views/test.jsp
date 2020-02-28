@@ -21,6 +21,12 @@
     z-index: 1000;
   }
 </style>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../../resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../../resources/css/blog.css" rel="stylesheet">
 </head>
 <body>
  <h2>Ajax Test Page</h2>
@@ -38,7 +44,7 @@
       <ul id="replies">
      
       </ul>
-      <ul class="pagination">
+      <ul class="pagination justify-content-center mb-4">
         
       </ul>
     </div>
@@ -102,16 +108,16 @@
     var str = "";
 
     if(pageMaker.prev){
-      str += "<li><a href='" + (pageMaker.startPage - 1) + "'> <</a></li>";
+      str += "<li class='page-item'><a class='page-link' href='" + (pageMaker.startPage - 1) + "'> &larr;</a></li>";
     }
 
     for(var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++){
       var strClass = pageMaker.cri.page == i ? 'class=active' : '';
-      str += "<li " + strClass + "><a href='" + i + "'>" + i + "</a></li>";
+      str += "<li class='page-item " + strClass + "><a class='page-link' href='" + i + "'>" + i + "</a></li>";
     }
 
     if(pageMaker.next){
-      str += "<li><a href='" + (pageMaker.endPage + 1) + "'> ></a></li>";
+      str += "<li class='page-item'><a class='page-link' href='" + (pageMaker.endPage + 1) + "'> &rarr;</a></li>";
     }
     $(".pagination").html(str);
   }
@@ -205,6 +211,21 @@
       }
     });
   });
+
+  var replyPage = 1;
+
+  $(".pagination").on("click", "li a", function(event){
+
+    event.preventDefault();
+
+    replyPage = $(this).attr("href");
+
+    getPageList(replyPage);
+  });
  </script>
+ 
+   <!-- Bootstrap core JavaScript -->
+  <script src="../../resources/vendor/jquery/jquery.min.js"></script>
+  <script src="../../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

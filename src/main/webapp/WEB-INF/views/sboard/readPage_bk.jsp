@@ -107,34 +107,47 @@
         <div class="card my-4">
           <h5 class="card-header">Leave a Comment:</h5>
           <div class="card-body">
-            <!-- <form> -->
+            <form>
               <div class="form-group">
-                <p>Writer</p>
-                <p><input type="text" class="form-control" id="newReplyWriter"></p>
-                <p>Comments</p>
-                <p><textarea class="form-control" id="newReplyText" rows="3"></textarea></p>
+                <textarea class="form-control" rows="3"></textarea>
               </div>
-              <button type="submit" id="replyAddBtn" class="btn btn-primary">Submit</button>
-            <!-- </form> -->
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
           </div>
         </div>
 
-        <hr>
-
-        <div class="btn btn-info">
-          <span id="repliesDiv" class="bg-green">Replies List</span>
-        </div>
-        
-        <hr>
-        
         <!-- Single Comment -->
-        <div id="replies" style="display: none;">
+        <div class="media mb-4">
+          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+          <div class="media-body">
+            <h5 class="mt-0">Commenter Name</h5>
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+          </div>
         </div>
-        
-        <!-- pagination -->
-        <div class="text-center">
-          <ul id="pagination" class="pagination pagination-sm no-margin">
-          </ul>
+
+        <!-- Comment with nested comments -->
+        <div class="media mb-4">
+          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+          <div class="media-body">
+            <h5 class="mt-0">Commenter Name</h5>
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+
+            <div class="media mt-4">
+              <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+              <div class="media-body">
+                <h5 class="mt-0">Commenter Name</h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+              </div>
+            </div>
+
+            <div class="media mt-4">
+              <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+              <div class="media-body">
+                <h5 class="mt-0">Commenter Name</h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -254,13 +267,20 @@
   <!-- Bootstrap core JavaScript -->
   <script src="../../../resources/vendor/jquery/jquery.min.js"></script>
   <script src="../../../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script>
+
+    <script>
     $(document).ready(function(){
 
         var formObj = $("form[role='form']");
 
         console.log(formObj);
 
+        /* $(".btn-warning").on("click", function(){
+          formObj.attr("action", "/board/modify");
+          formObj.attr("method", "get");
+          formObj.submit();
+        }); */
+        
         $(".btn-warning").on("click", function(){
             formObj.attr("action", "/sboard/modifyPage");
             formObj.attr("method", "get");
@@ -271,8 +291,13 @@
 
           formObj.attr("method", "post");
           formObj.attr("action", "/sboard/removePage");
+          /* formObj.attr("action", "/board/remove"); */
           formObj.submit();
         });
+
+        /* $(".btn-primary").on("click", function(){
+            self.location = "/board/listAll";
+          }); */
 
         $(".btn-primary").on("click", function(){
           formObj.attr("method", "get");
@@ -280,99 +305,7 @@
           formObj.submit();
         });
     });
-
-    var bno = ${boardVO.bno};
-    var replyPage = 1;
-
-    /* Get Comment List */
-    getPage("/replies/" + bno + "/1");
-
-    /* Comment Paging Process */
-    function getPage(pageInfo){
-
-      $.getJSON(pageInfo, function(data){
-
-        console.log(data.list.length);
-
-        var str = "";
-        $(data.list).each(function(index){
-            str += "<div class='media mb-4'><img class='d-flex mr-3 rounded-circle' src='http://placehold.it/50x50' alt=''>"
-                + "<div class='media-body'><h5 class='mt-0'>" + this.replyer + "</h5>"
-    			+ this.replyText + "</div></div>"; 
-        });
-        $("#replies").html(str);
-        
-        printPaging(data.pageMaker, $(".pagination"));
-
-      });
-      
-    }
-
-    var printPaging = function(pageMaker, target){
-
-      var str = "";
-
-      if(pageMaker.prev){
-        str += "<li class='page-item'><a class='page-link' href='" + (pageMaker.startPage-1) +"'>&larr; Older</a></li>";
-      }
-
-      for(var i = pageMaker.startPage, len = pageMaker.endPage; i < len; i++){
-        var strClass = pageMaker.cri.page == i ? 'class=actice' : '';
-        str += "<li class='page-item" + strClass + "'<a class='page-link' href='" + i + "'</a></li>";
-      }
-      
-      if(pageMaker.next){
-        str += "<li class='page-item'><a class='page-link' href='" + (pageMaker.endPage + 1) + "'>Newer &rarr;</a></li>";
-      }
-
-      target.html(str);
-    }
-
-    /* Event process of replies list */
-    $("#repliesDiv").on("click", function(){
-      $("#replies").show("slow");
-      getPage("/replies/" + bno + "/1");
-    });
-
-    /* Paging event process of replies */
-    $("#pagination").on("click", "li a", function(event){
-
-      event.preventDefault();
-
-      replyPage = $(this).attr("href");
-
-      getPage("/replies/" + bno + "/" + replyPage);
-    });
-
-    /* Add reply */
-     $("#replyAddBtn").on("click",function(){
-
-      var replyerObj = $("#newReplyWriter");
-      var replytextObj = $("#newReplyText");
-      var replyer = replyerObj.val();
-      var replytext = replytextObj.val();
-
-      $.ajax({
-        type : "post",
-        url : "/replies/",
-        headers : {
-          "Content-Type" : "application/json",
-          "X-Http-Method-Override" : "POST"
-        },
-        dataType : "text",
-        data : JSON.stringify({bno:bno, replyer:replyer, replyText:replytext}),
-        success : function(result){
-          console.log("result : " + result);
-          if(result == "success"){
-            alert("Reply Registered");
-            replyPage = 1;
-            getPage("/replies/" + bno + "/" + replyPage);
-            replyerObj.val("");
-            replytextObje.val("");
-          }
-        }
-      });  
-    });
   </script>
+
 </body>
 </html>

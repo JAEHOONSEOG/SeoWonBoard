@@ -31,4 +31,18 @@ public class HomeController {
 		
 	}
 	
+	@RequestMapping(value="/ex00", method=RequestMethod.GET)
+	public void handlebarsTest00() {
+		
+	}
+	
+	@RequestMapping(value="/ex01", method=RequestMethod.GET)
+	public void handlebarsTest01() {
+		
+	}
+	
+	@RequestMapping(value="/ex02", method=RequestMethod.GET)
+	public void handlebarsTest02() {
+		
+	}
 }
