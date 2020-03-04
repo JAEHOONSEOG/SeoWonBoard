@@ -133,7 +133,7 @@
         
         <!-- pagination -->
         <div class="text-center">
-          <ul id="pagination" class="pagination pagination-sm no-margin">
+          <ul id="pagination" class="pagination pagination-sm " style="display: none;">
           </ul>
         </div>
       </div>
@@ -309,28 +309,39 @@
     }
 
     var printPaging = function(pageMaker, target){
-
+      console.log("Get into the pagination process...")
       var str = "";
 
       if(pageMaker.prev){
-        str += "<li class='page-item'><a class='page-link' href='" + (pageMaker.startPage-1) +"'>&larr; Older</a></li>";
+        str += "<li class='page-item'><a class='page-link' href='" + (pageMaker.startPage-1) 
+            +"' style='width:35px; height:30px;'>&larr; Older</a></li>";
       }
 
       for(var i = pageMaker.startPage, len = pageMaker.endPage; i < len; i++){
-        var strClass = pageMaker.cri.page == i ? 'class=actice' : '';
-        str += "<li class='page-item" + strClass + "'<a class='page-link' href='" + i + "'</a></li>";
+        var strClass = pageMaker.cri.page == i ? 'active' : '';
+        str += "<li class='page-item " + strClass + "' ><a class='page-link' href='" + i 
+            + "' style='width:35px; height:30px;'>" + i + "</a></li>";
       }
       
       if(pageMaker.next){
-        str += "<li class='page-item'><a class='page-link' href='" + (pageMaker.endPage + 1) + "'>Newer &rarr;</a></li>";
+        str += "<li class='page-item'><a class='page-link' href='" + (pageMaker.endPage + 1) 
+            + "' style='width:35px; height:30px;'>Newer &rarr;</a></li>";
       }
-
+      console.log("Pagination str : " + str);
       target.html(str);
     }
 
     /* Event process of replies list */
     $("#repliesDiv").on("click", function(){
-      $("#replies").show("slow");
+      var status = document.getElementById("replies").style.display;
+      if(status == "none"){
+        $("#replies").show("slow");
+        $(".pagination").show("slow");
+      }
+      else {
+        $("#replies").hide("slow");
+        $(".pagination").hide("slow");
+      }
       getPage("/replies/" + bno + "/1");
     });
 
@@ -345,7 +356,7 @@
     });
 
     /* Add reply */
-     $("#replyAddBtn").on("click",function(){
+    $("#replyAddBtn").on("click",function(){
 
       var replyerObj = $("#newReplyWriter");
       var replytextObj = $("#newReplyText");
