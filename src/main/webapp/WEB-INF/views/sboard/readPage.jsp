@@ -60,9 +60,9 @@
       <!-- Post Content Column -->
       <div class="col-lg-8">
 
-        <form role="form" method="post">
+        <%-- <form role="form" method="post">
           <input type="hidden" name="bno" value="${boardVO.bno}">
-        </form>
+        </form> --%>
         
         <!-- Title -->
         <h1 class="mt-4">${boardVO.title}</h1>
@@ -114,7 +114,7 @@
                 <p>Comments</p>
                 <p><textarea class="form-control" id="newReplyText" rows="3"></textarea></p>
               </div>
-              <button type="submit" id="replyAddBtn" class="btn btn-primary">Submit</button>
+              <button type="submit" id="replyAddBtn" class="btn btn-success">Submit</button>
             <!-- </form> -->
           </div>
         </div>
@@ -233,7 +233,27 @@
             You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
           </div>
         </div>
-
+        
+        <!-- Modal -->
+        <div id="modifyModal" class="modal modal-primary fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content -->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+              </div>
+              <div class="modal-body" data-rno>
+                <p><input type="text" id="replytext" class="form-control"></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
+                <button type="button" class="btn btn-danger" id="replyDelBtn">Delete</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -246,7 +266,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+      <p class="m-0 text-center text-white">Copyright &copy; Seowon 2020</p>
     </div>
     <!-- /.container -->
   </footer>
@@ -297,8 +317,12 @@
         var str = "";
         $(data.list).each(function(index){
             str += "<div class='media mb-4'><img class='d-flex mr-3 rounded-circle' src='http://placehold.it/50x50' alt=''>"
-                + "<div class='media-body'><h5 class='mt-0'>" + this.replyer + "</h5>"
-    			+ this.replyText + "</div></div>"; 
+                + "<div class='media-body' id='timeline-body'><h5 class='mt-0'>" + this.replyer + "</h5>"
+    			+ this.replyText
+    			+ "</div>" 
+    			+ "<div class='timeline-footer'>"
+    			+ "<a class='btn btn-primary btn-xs' id='reply-modal' data-toggle='modal' data-target='#modifyModal'>Modify</a></div>"
+    			+ "</div>"; 
         });
         $("#replies").html(str);
         
@@ -368,7 +392,7 @@
         url : "/replies/",
         headers : {
           "Content-Type" : "application/json",
-          "X-Http-Method-Override" : "POST"
+          "X-HTTP-Method-Override" : "POST"
         },
         dataType : "text",
         data : JSON.stringify({bno:bno, replyer:replyer, replyText:replytext}),
@@ -383,6 +407,67 @@
           }
         }
       });  
+    });
+
+    /* Reply modify modal */
+     $("#reply-modal").on("click", function(){
+
+     alert("Sample");
+      var reply = $(this);
+      console.log("Reply : " + reply);
+
+      $("#replytext").val(reply.find('#timeline-body').text());
+      console.log("Find timeline-body text : " + reply.find('#timeline-body').text());
+      $(".modal-title").html(reply.attr("data-rno"));
+      
+    });
+
+    $("#replyModBtn").on("click", function(){
+
+      var rno = $(".modal-title").html();
+      var replytext = $("#replytext").val();
+
+      $.ajax({
+        type : "put",
+        url : "/replies/" + rno,
+        headers: {
+               "Content-Type" : "application/json",
+               "X-Http-Method-Override" : "PUT", 
+        },
+        data : JSON.stringify({replyText : replytext}),
+        dataType : "text",
+        success : function(result){
+          console.log("result : " + result);
+          if(result == "success"){
+            alert("Reply Modification is completed");
+            getPage("/replies/" + bno + "/" + replyPage);
+          }
+        }
+      });
+    });
+
+    $("#replyDelBtn").on("click", function(){
+
+      var rno = $(".modal-title").html();
+      var replytext = $("#replytext").val();
+
+      $.ajax({
+          type : "delete",
+          url : "/replies/" + rno,
+          headers: {
+                 "Content-Type" : "application/json",
+                 "X-Http-Method-Override" : "DELETE", 
+          },
+          data : JSON.stringify({replyText : replytext}),
+          dataType : "text",
+          success : function(result){
+            console.log("result : " + result);
+            if(result == "success"){
+              alert("Reply is deleted");
+              getPage("/replies/" + bno + "/" + replyPage);
+            }
+          }
+        });
     });
   </script>
 </body>
