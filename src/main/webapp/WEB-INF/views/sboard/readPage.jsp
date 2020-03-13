@@ -240,15 +240,15 @@
             <!-- Modal content -->
             <div class="modal-content">
               <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
               <div class="modal-body" data-rno>
                 <p><input type="text" id="replytext" class="form-control"></p>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
-                <button type="button" class="btn btn-danger" id="replyDelBtn">Delete</button>
+                <button type="button" class="btn btn-info" id="replyModBtn" data-dismiss="modal">Modify</button>
+                <button type="button" class="btn btn-secondary" id="replyDelBtn" data-dismiss="modal">Delete</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -317,11 +317,15 @@
         var str = "";
         $(data.list).each(function(index){
             str += "<div class='media mb-4'><img class='d-flex mr-3 rounded-circle' src='http://placehold.it/50x50' alt=''>"
-                + "<div class='media-body' id='timeline-body'><h5 class='mt-0'>" + this.replyer + "</h5>"
+                + "<div class='media-body' id='timeline-body'><h5 class='mt-0' id='replyer'>" + this.replyer + "</h5>"
     			+ this.replyText
+    			+ "<input type='hidden' id='comment-rno-" + this.rno + "' value='" + this.rno + "'>"
+    			+ "<input type='hidden' id='comment-replytext-" + this.rno + "' value='" + this.replyText + "'>"
     			+ "</div>" 
     			+ "<div class='timeline-footer'>"
-    			+ "<a class='btn btn-primary btn-xs' id='reply-modal' data-toggle='modal' data-target='#modifyModal'>Modify</a></div>"
+    			+ "<a class='btn btn-primary btn-sm' data-toggle='modal' data-target='#modifyModal' onclick='replyModify("
+    			+ this.rno
+    			+ ")'>Modify</a></div>"
     			+ "</div>"; 
         });
         $("#replies").html(str);
@@ -403,25 +407,24 @@
             replyPage = 1;
             getPage("/replies/" + bno + "/" + replyPage);
             replyerObj.val("");
-            replytextObje.val("");
+            replytextObj.val("");
           }
         }
       });  
     });
 
     /* Reply modify modal */
-     $("#reply-modal").on("click", function(){
+    function replyModify(rno){
 
-     alert("Sample");
-      var reply = $(this);
-      console.log("Reply : " + reply);
-
-      $("#replytext").val(reply.find('#timeline-body').text());
-      console.log("Find timeline-body text : " + reply.find('#timeline-body').text());
-      $(".modal-title").html(reply.attr("data-rno"));
+      var commentRno = "#comment-rno-" + rno;
+      var ReplyTxtRno = "#comment-replytext-" + rno;   
       
-    });
+      $("#replytext").val($(ReplyTxtRno).val());
+      $(".modal-title").html($(commentRno).val());
+      
+    };
 
+    /* Modify Reply */
     $("#replyModBtn").on("click", function(){
 
       var rno = $(".modal-title").html();
@@ -432,7 +435,7 @@
         url : "/replies/" + rno,
         headers: {
                "Content-Type" : "application/json",
-               "X-Http-Method-Override" : "PUT", 
+               "X-HTTP-Method-Override" : "PUT", 
         },
         data : JSON.stringify({replyText : replytext}),
         dataType : "text",
@@ -446,6 +449,7 @@
       });
     });
 
+    /* Remove Reply */
     $("#replyDelBtn").on("click", function(){
 
       var rno = $(".modal-title").html();
@@ -453,12 +457,11 @@
 
       $.ajax({
           type : "delete",
-          url : "/replies/" + rno,
+          url : "/replies/" + bno + "/" + rno,
           headers: {
                  "Content-Type" : "application/json",
-                 "X-Http-Method-Override" : "DELETE", 
+                 "X-HTTP-Method-Override" : "DELETE", 
           },
-          data : JSON.stringify({replyText : replytext}),
           dataType : "text",
           success : function(result){
             console.log("result : " + result);

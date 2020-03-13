@@ -54,11 +54,11 @@ public class ReplyController {
 		return entity;
 	}
 	
-	@RequestMapping(value="/{rno}", method=RequestMethod.DELETE)
-	public ResponseEntity<String> remove(@PathVariable("rno") Integer rno) {
+	@RequestMapping(value="/{bno}/{rno}", method=RequestMethod.DELETE)
+	public ResponseEntity<String> remove(@PathVariable("bno") Integer bno, @PathVariable("rno") Integer rno) {
 		ResponseEntity<String> entity = null;
 		try {
-			service.removeReply(rno);
+			service.removeReply(bno, rno);
 			entity = new ResponseEntity<String>("success", HttpStatus.OK);
 		}catch(Exception e) {
 			e.printStackTrace();

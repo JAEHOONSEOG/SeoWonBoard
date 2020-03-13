@@ -21,6 +21,7 @@ create table seowonhm.tsn_board (
 );
 
 -- reply Table
+-- drop table seowonhm.tsn_reply;
 create table seowonhm.tsn_reply (
  rno INT NOT NULL AUTO_INCREMENT,
  bno INT NOT NULL DEFAULT 0,
@@ -30,4 +31,16 @@ create table seowonhm.tsn_reply (
  updatedate TIMESTAMP NOT NULL DEFAULT NOW(),
  PRIMARY KEY(rno),
  CONSTRAINT fk_board FOREIGN KEY(bno) references seowonhm.tsn_board(bno)
-);
+ );
+
+TRUNCATE TABLE seowonhm.tsn_reply;
+
+ALTER TABLE seowonhm.tsn_reply DROP FOREIGN KEY fk_board;
+
+ALTER TABLE seowonhm.tsn_reply ADD CONSTRAINT fk_board 
+FOREIGN KEY (bno) references seowonhm.tsn_board(bno)
+ON UPDATE CASCADE
+ON DELETE SET NULL
+;
+
+drop table seowonhm.tsn_reply;

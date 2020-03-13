@@ -48,6 +48,6 @@ public class ReplyDAOTest {
 	
 	@Test
 	public void testDelete() throws Exception {
-		dao.delete(1);
+		dao.delete(1,1);
 	}
 }

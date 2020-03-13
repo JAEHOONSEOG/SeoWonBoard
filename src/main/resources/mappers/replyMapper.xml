@@ -26,7 +26,9 @@
   </update>
   
   <delete id="delete">
-    delete from seowonhm.tsn_reply where rno = #{rno}
+    delete from seowonhm.tsn_reply 
+    where rno = #{rno} 
+    and bno = (select bno from seowonhm.tsn_board where bno = #{bno})
   </delete>
   
   <select id="listPage" resultType="ReplyVO">

@@ -36,8 +36,11 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 
 	@Override
-	public void delete(Integer rno) throws Exception {
-		session.delete(namespace + ".delete", rno);
+	public void delete(Integer bno, Integer rno) throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("bno", bno);
+		paramMap.put("rno", rno);
+		session.delete(namespace + ".delete", paramMap);
 	}
 
 	@Override
