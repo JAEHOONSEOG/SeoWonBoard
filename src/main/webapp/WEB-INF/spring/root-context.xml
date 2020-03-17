@@ -2,12 +2,15 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 		https://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 		http://www.springframework.org/schema/context
       	http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
 			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
@@ -32,5 +35,7 @@
 	
 	<context:component-scan base-package="com.seowon.persistence"></context:component-scan>
 	<context:component-scan base-package="com.seowon.service "></context:component-scan>
+	
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 </beans>
 
