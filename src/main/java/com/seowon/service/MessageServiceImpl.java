@@ -3,6 +3,7 @@ package com.seowon.service;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.seowon.domain.MessageVO;
 import com.seowon.persistence.MessageDAO;
@@ -17,6 +18,7 @@ public class MessageServiceImpl implements MessageService {
 	@Inject
 	private PointDAO pointDao;
 	
+	@Transactional
 	@Override
 	public void addMessage(MessageVO vo) throws Exception {
 		messageDao.create(vo);
