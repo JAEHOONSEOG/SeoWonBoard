@@ -11,22 +11,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-@Component
-@Aspect
+/*@Component*/
+/* @Aspect */
 public class SampleAdvice {
 	
 	private static final Logger logger = 
 			LoggerFactory.getLogger(SampleAdvice.class);
 	
-	/* @Before("execution(* com.seowon.service.MessageService.*.*(..))") */
+	/* @Before("execution(* com.seowon.service.MessageService.*(..))") */
 	public void startLog(JoinPoint jp) {
 		
 		logger.info("------------------------------");
 		logger.info("------------------------------");
-		logger.info(Arrays.toString(jp.getArgs()));
+		logger.info("Get jp.getArgs : " + Arrays.toString(jp.getArgs()));
 	}
 	
-	/* @Around("execution(* com.seowon.service.MessageService.*.*(..))") */
+	/* @Around("execution(* com.seowon.service.MessageService.*(..))") */
 	public Object timeLog(ProceedingJoinPoint pjp) throws Throwable{
 		long startTime = System.currentTimeMillis();
 		logger.info(Arrays.toString(pjp.getArgs()));

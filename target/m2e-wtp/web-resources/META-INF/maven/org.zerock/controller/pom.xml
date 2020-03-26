@@ -37,7 +37,7 @@
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
-			<version>${org.aspectj-version}</version>
+			<version>1.9.4</version>
 		</dependency>	
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -172,12 +172,19 @@
 			<artifactId>log4jdbc-log4j2-jdbc4</artifactId>
 			<version>1.16</version>
 		</dependency>
-		<!-- Spring-Tx (for transaction of AOP) -->
+		<!-- Spring-Transaction -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
-			<version>5.2.2.RELEASE</version>
-		</dependency>   
+			<version>5.2.4.RELEASE</version>
+		</dependency> 
+		<!-- Spring-AOP -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>5.2.4.RELEASE</version>
+		</dependency> 
+		  
 	</dependencies>
     <build>
         <plugins>

@@ -13,9 +13,13 @@
 
   <title>Blog Post - Start Bootstrap Template</title>
 
+  <!-- Bootstrap core JavaScript -->
+  <script src="../../../resources/vendor/jquery/jquery.min.js"></script>
+  <script src="../../../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../../resources/js/modifyPage.js"></script>
+
   <!-- Bootstrap core CSS -->
   <link href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
   <!-- Custom styles for this template -->
   <link href="../../../resources/css/blog.css" rel="stylesheet">
 
@@ -210,32 +214,5 @@
     </div>
     <!-- /.container -->
   </footer>
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="../../../resources/vendor/jquery/jquery.min.js"></script>
-  <script src="../../../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    $(document).ready(function(){
-
-        var formObj = $("form[role='form']");
-
-        console.log(formObj);
-
-        $(".btn-primary").on("click", function(){
-          formObj.submit();        	
-        });
-        
-        /* $(".btn-warning").on("click", function(){
-          self.location = "/board/listAll";
-        }); */
-
-        $(".btn-warning").on("click", function(){
-            self.location = "/sboard/list?page=${cri.page}&perPageNum=${cri.perPageNum}"
-                + "&searchType=${cri.searchType}&keyword=${cri.keyword}";
-          });
-    });
-  </script>
-   
 </body>
 </html>

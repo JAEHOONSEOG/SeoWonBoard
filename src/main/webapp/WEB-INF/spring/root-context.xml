@@ -8,10 +8,10 @@
 		https://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 		http://www.springframework.org/schema/context
       	http://www.springframework.org/schema/context/spring-context-2.5.xsd
-      	http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop.xsd
-        http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx.xsd">
+      	http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
@@ -37,18 +37,17 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>	
 	</bean>
 	
-	<!-- Transaction Manager -->
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"></property>
-	</bean>
-	
 	<context:component-scan base-package="com.seowon.persistence"></context:component-scan>
 	<context:component-scan base-package="com.seowon.service "></context:component-scan>
 	<context:component-scan base-package="com.seowon.aop" ></context:component-scan>
 
-	<aop:config></aop:config>
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<aop:config></aop:config>
 	
-	<tx:annotation-driven/>
+	<!-- Transaction Manager -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>
 
