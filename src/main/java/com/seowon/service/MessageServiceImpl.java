@@ -18,7 +18,6 @@ public class MessageServiceImpl implements MessageService {
 	@Inject
 	private PointDAO pointDao;
 	
-	@Transactional
 	@Override
 	public void addMessage(MessageVO vo) throws Exception {
 		messageDao.create(vo);
