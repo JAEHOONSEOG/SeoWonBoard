@@ -55,14 +55,11 @@ create table seowonhm.tsn_message(
  constraint fk_usersender foreign key(targetid) references seowonhm.tsn_user(uid)
 );
 
-TRUNCATE TABLE seowonhm.tsn_reply;
-
-ALTER TABLE seowonhm.tsn_reply DROP FOREIGN KEY fk_board;
-
-ALTER TABLE seowonhm.tsn_reply ADD CONSTRAINT fk_board 
-FOREIGN KEY (bno) references seowonhm.tsn_board(bno)
-ON UPDATE CASCADE
-ON DELETE SET NULL
-;
-
-drop table seowonhm.tsn_reply;
+-- attach Table
+create table seowonhm.tsn_attach(
+ fullName varchar(150) NOT NULL,
+ bno int NOT NULL,
+ regdate timestamp default NOW(),
+ primary key(fullName),
+ constraint fk_board_attach foreign key(bno) references seowonhm.tsn_board(bno)
+);

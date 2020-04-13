@@ -1,5 +1,6 @@
 package com.seowon.domain;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class BoardVO {
@@ -10,6 +11,16 @@ public class BoardVO {
 	private String writer;
 	private Date regDate;
 	private int viewCnt;
+	
+	private String[] files;
+	
+	public String[] getFiles() {
+		return files;
+	}
+	
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
 	public Integer getBno() {
 		return bno;
 	}
@@ -46,9 +57,10 @@ public class BoardVO {
 	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
 	}
+
 	@Override
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", title=" + title + ", content=" + content + ", writer=" + writer + ", regDate="
-				+ regDate + ", viewCnt=" + viewCnt + "]";
+				+ regDate + ", viewCnt=" + viewCnt + ", files=" + Arrays.toString(files) + "]";
 	}
 }

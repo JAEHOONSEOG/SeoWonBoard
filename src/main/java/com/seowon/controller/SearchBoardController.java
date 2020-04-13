@@ -46,9 +46,7 @@ public class SearchBoardController {
 	}
 
 	@RequestMapping(value="/register", method=RequestMethod.GET)
-	public void registerGET(@RequestParam("bno") int bno, 
-			@ModelAttribute("cri") SearchCriteria cri,
-			Model model) throws Exception {
+	public void registerGET() throws Exception {
 		logger.info("register get......");
 	}
 	

@@ -9,6 +9,10 @@
     values(#{title}, #{content}, #{writer})
   </insert>
   
+  <insert id="addAttach">
+    insert into seowonhm.tsn_attach(fullName, bno) values(#{fullName}, LAST_INSERT_ID())
+  </insert>
+  
   <select id="read" resultType="BoardVO">
     select 
       bno, title, content, writer, regdate, viewcnt
