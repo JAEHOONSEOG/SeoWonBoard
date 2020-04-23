@@ -50,8 +50,6 @@ $(document).ready(function(){
 	$(".uploadedList").on("click", "small", function(event){
 
 		var that = $(this);
-		alert("Get into the small area");
-		alert("Get Data Src : " + $(this).attr("data-src"));
 		$.ajax({
 			url: "deleteFile",
 		    type: "post",
