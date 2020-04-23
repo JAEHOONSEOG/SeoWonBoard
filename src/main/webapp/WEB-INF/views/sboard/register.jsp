@@ -11,30 +11,29 @@
 
   <title>Blog Post - Start Bootstrap Template</title>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="../../../resources/vendor/jquery/jquery.min.js"></script>
-  <script src="../../../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-  <script src="../../../resources/js/upload.js"></script>
-
   <!-- Bootstrap core CSS -->
   <link href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom styles for this template -->
   <link href="../../../resources/css/blog.css" rel="stylesheet">
 
-</head>
-
-<body>
+  <!-- Bootstrap core JavaScript -->
+  <script src="../../../resources/vendor/jquery/jquery.min.js"></script>
+  <script src="../../../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
   <script id="template" type="text/x-handlebars-template">
-    <li>
+    <div>
       <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
-      <div class="mailbox-attachment-info>
+      <div class="mailbox-attachment-info">
       <a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-      <a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
+      <a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn">
+        <small data-src="{{fullName}}">x</small><i class="fa fa-fw fa-remove"></i>
+      </a>
       </div>
-    </li>
+    </div>
   </script>
-  
+  <script src="../../../resources/js/upload.js"></script>
+</head>
+<body>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -97,14 +96,12 @@
           
           <hr>
           
-          <div class="form-group">
-	          <label for="exampleInputEmail">File DROP Here</label>
-    	      <div class="fileDrop"></div>
+   	      <div class="fileDrop">
+          	<label for="exampleInputEmail">File DROP Here</label>
+          	<div class="mailbox-attachments clearfix uploadedList"></div>
           </div>
-          
+
           <hr>
-          
-          <ul class="mailbox-attachments clearfix uploadedList"></ul>
           
           <button type="submit" id="registerForm" class="btn btn-primary">Submit</button>
           <br><br>
@@ -209,7 +206,7 @@
         </div>
       </div>
       <!-- /.row -->
-
+	</div>
     </div>
     <!-- /.container -->
   </form>
@@ -221,58 +218,5 @@
     </div>
     <!-- /.container -->
   </footer>
-  
-  <script>
-	var template = Handlebars.comile($("#template").html());
-
-	$(".fileDrop").on("dragenter dragover", function(event){
-		event.preventDefault();
-	});
-
-	$(".fileDrop").on("drop", function(event){
-		event.preventDefault();
-
-		var files = event.originalEvent.dataTransfer.files;
-
-		var file = files[0];
-
-		var formData = new FormData();
-
-		formData.append("file", file);
-
-		$.ajax({
-			url: "uploadAjax",
-			data: formData,
-			dataType: "text",
-			processData: false,
-			contentType: false,
-			type: "POST",
-			success: function(data){
-
-				var fileInfo = getFileInfo(data);
-
-				var html = template(fileInfo);
-
-				$(".uploadedList").append(html);
-			}
-		});
-	});
-
-	$("#registerForm").submit(function(event){
-		event.preventDefault();
-
-		var that = $(this);
-
-		var str = "";
-
-		$(".uploadedList .delbtn").each(function(index){
-			str += "<input type='hidden' name='files[" + index +"]' value='" + $(this).attr("href") + "'> ";
-		});
-
-		that.append(str);
-
-		that.get(0).submit();
-	});
-  </script>
 </body>
 </html>

@@ -14,20 +14,27 @@
 
   <title>Blog Post - Start Bootstrap Template</title>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="../../../resources/vendor/jquery/jquery.min.js"></script>
-  <script src="../../../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../../../resources/js/readPage.js"></script>
-
   <!-- Bootstrap core CSS -->
   <link href="../../../resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom styles for this template -->
   <link href="../../../resources/css/blog.css" rel="stylesheet">
 
+  <!-- Bootstrap core JavaScript -->
+  <script src="../../../resources/vendor/jquery/jquery.min.js"></script>
+  <script src="../../../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
+  <script id="templateAttach" type="text/x-handlebars-template">
+    <div data-src="{{fullName}}">
+      <!--<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>-->
+      <div class="mailbox-attachment-info">
+        <a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+      </div>
+    </div>
+  </script>
+  <script src="../../../resources/js/readPage.js"></script>
 </head>
-
 <body>
-
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -93,6 +100,15 @@
         <!-- Post Content -->
         <p class="lead">${boardVO.content}</p>
 
+        <hr>
+        
+		<div class="mailbox-attachments clearfix uploadedList"></div>
+		
+		<div class="popup back" style="display:none;"></div>
+		<div id="popup front" class="popup front" style="display:none">
+		  <img id="popup_img">
+		</div>
+        
         <hr>
         
         <form role="form" action="modifyPage" method="post">

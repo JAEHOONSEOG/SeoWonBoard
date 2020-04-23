@@ -10,8 +10,13 @@
   </insert>
   
   <insert id="addAttach">
-    insert into seowonhm.tsn_attach(fullName, bno) values(#{fullName}, LAST_INSERT_ID())
+    insert into seowonhm.tsn_attach(fullName, bno) 
+    values(#{fullName}, (select MAX(LAST_INSERT_ID(bno)) from seowonhm.tsn_board order by regdate desc))
   </insert>
+  
+  <select id="getAttach" resultType="String">
+    select fullName from seowonhm.tsn_attach where bno = #{bno} order by regdate
+  </select>
   
   <select id="read" resultType="BoardVO">
     select 

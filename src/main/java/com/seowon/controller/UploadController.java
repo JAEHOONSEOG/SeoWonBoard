@@ -30,24 +30,6 @@ public class UploadController {
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
-//	@RequestMapping(value="/uploadForm", method=RequestMethod.GET) 
-//	public void uploadForm() {}
-	 
-	
-//	@RequestMapping(value="/uploadForm", method=RequestMethod.POST)
-//	public String uploadForm(MultipartFile file, Model model) throws Exception {
-//		
-//		logger.info("originalName: " + file.getOriginalFilename());
-//		logger.info("size: " + file.getSize());
-//		logger.info("contentType : " + file.getContentType());
-//		
-//		String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
-//		
-//		model.addAttribute("savedName", savedName);
-//		
-//		return "uploadResult";
-//	}
-	
 	@RequestMapping(value="/uploadAjax", method=RequestMethod.GET)
 	public void uplaodAjax() {}
 	
@@ -89,7 +71,8 @@ public class UploadController {
 				headers.setContentType(mType);
 			} else {
 				fileName = fileName.substring(fileName.indexOf("_") + 1);
-				fileName = fileName.substring(0, fileName.lastIndexOf("/"));
+				if(fileName.contains("/"))
+					fileName = fileName.substring(0, fileName.lastIndexOf("/"));
 				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 				headers.add("Content-Disposition", "attachment; filename=\""+ 
 						new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
