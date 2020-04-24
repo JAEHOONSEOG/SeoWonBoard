@@ -18,6 +18,14 @@
     select fullName from seowonhm.tsn_attach where bno = #{bno} order by regdate
   </select>
   
+  <delete id="deleteAttach">
+    delete from seowonhm.tsn_attach where bno = #{bno}
+  </delete>
+  
+  <update id="replaceAttach">
+    insert into seowonhm.tsn_attach (fullName, bno) values(#{fullName}, #{bno})
+  </update>
+  
   <select id="read" resultType="BoardVO">
     select 
       bno, title, content, writer, regdate, viewcnt

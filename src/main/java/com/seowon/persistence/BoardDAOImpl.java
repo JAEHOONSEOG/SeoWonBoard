@@ -1,11 +1,14 @@
 package com.seowon.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+
 import com.seowon.domain.BoardVO;
 import com.seowon.domain.Criteria;
 import com.seowon.domain.SearchCriteria;
@@ -80,6 +83,19 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public List<String> getAttach(Integer bno) throws Exception {
 		return session.selectList(namespace + ".getAttach", bno);
-//		return session.selectOne(namespace + ".getAttach", bno);
+	}
+
+	@Override
+	public void deleteAttach(Integer bno) throws Exception {
+		session.delete(namespace + ".deleteAttach", bno);
+		
+	}
+
+	@Override
+	public void replaceAttach(String fullName, Integer bno) throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("fullName", fullName);
+		paramMap.put("bno", bno);
+		session.insert(namespace + ".replaceAttach", paramMap);
 	}
 }

@@ -17,6 +17,23 @@ $(document).ready(function(){
 
     $(".btn-danger").on("click", function(){
 
+      var replyCnt = $("#replyCntSmall").html();
+      
+      if(replyCnt > 0) {
+    	  alert("Can't remove the article with replies");
+    	  return;
+      }
+      
+      var arr = [];
+      $("#fileList").each(function(index){
+    	 arr.push($(this).attr("data-src")); 
+      });
+      
+      if(arr.length > 0)
+    	  $.post("/deleteAllFiles", {files:arr}, function(){
+    		  
+    	  })
+    	
       formObj.attr("method", "post");
       formObj.attr("action", "/sboard/removePage");
       formObj.submit();

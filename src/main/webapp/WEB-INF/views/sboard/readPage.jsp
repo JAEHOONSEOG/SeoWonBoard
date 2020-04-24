@@ -25,7 +25,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
   <script id="templateAttach" type="text/x-handlebars-template">
-    <div data-src="{{fullName}}">
+    <div id="fileList" data-src="{{fullName}}">
       <!--<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>-->
       <div class="mailbox-attachment-info">
         <a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
