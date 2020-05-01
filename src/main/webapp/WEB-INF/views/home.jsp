@@ -59,6 +59,7 @@
 
         <h1 class="my-4">Page Heading
           <small>Secondary Text</small>
+          <small>${result}</small>
         </h1>
 
         <!-- Blog Post -->
