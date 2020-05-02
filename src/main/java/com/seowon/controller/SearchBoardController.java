@@ -60,8 +60,10 @@ public class SearchBoardController {
 		logger.info(board.toString());
 		
 		String[] files = board.getFiles();
-		for(String file : files) {
-			logger.info("Get Files : " + file);
+		if(files != null) {
+			for(String file : files) {
+				logger.info("Get Files : " + file);
+			}
 		}
 		
 		service.regist(board);
@@ -73,6 +75,11 @@ public class SearchBoardController {
 	public void read(@RequestParam("bno") int bno,
 			@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		model.addAttribute(service.read(bno));
+
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		
+		pageMaker.setTotalCount(service.listSearchCount(cri));
 	}
 	
 	@RequestMapping(value="/sboard/modifyPage", method=RequestMethod.GET)

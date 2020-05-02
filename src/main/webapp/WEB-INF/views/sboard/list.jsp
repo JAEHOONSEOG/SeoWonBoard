@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ page session="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -164,6 +163,7 @@
               <input type="text" name="keyword" id="keywordInput" 
                 class="form-control" value="${cri.keyword }" placeholder="Search for...">
               <span class="input-group-btn">
+              	<input type="hidden" id="makeQuery" value="${pageMaker.makeQuery(1)}">
                 <button class="btn btn-secondary" type="button">Go!</button>
               </span>
              </div>
@@ -227,7 +227,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+      <p class="m-0 text-center text-white">Copyright &copy; Seowon 2020</p>
     </div>
     <!-- /.container -->
   </footer>

@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ page session="false" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -117,9 +116,12 @@
           <input type="hidden" name="perPageNum" value="${cri.perPageNum }">
           <input type="hidden" name="searchType" value="${cri.searchType}">
           <input type="hidden" name="keyword" value="${cri.keyword }">
-          <button type="submit" class="btn btn-warning">Modify</button>
-          <button type="submit" class="btn btn-danger">Remove</button>
-          <button type="submit" class="btn btn-primary">List All</button>
+		  
+		  <c:if test="${login.uid == boardVO.writer }">          
+          	<button type="submit" class="btn btn-warning">Modify</button>
+          	<button type="submit" class="btn btn-danger">Remove</button>
+          </c:if>
+          <button type="submit" class="btn btn-primary">Go List</button>
         </form>
         
         <hr>
@@ -129,14 +131,22 @@
           <h5 class="card-header">Leave a Comment:</h5>
           <div class="card-body">
             <!-- <form> -->
+            <c:if test="${not empty login }">
               <div class="form-group">
                 <p>Writer</p>
-                <p><input type="text" class="form-control" id="newReplyWriter"></p>
+                <p><input type="text" class="form-control" id="newReplyWriter" 
+                	placeholder="USER ID" value="${login.uid}" readonly="readonly"></p>
                 <p>Comments</p>
-                <p><textarea class="form-control" id="newReplyText" rows="3"></textarea></p>
+                <p><textarea class="form-control" id="newReplyText" rows="3" placeholder="Comments"></textarea></p>
               </div>
               <button type="submit" id="replyAddBtn" class="btn btn-success">Submit</button>
+            </c:if>  
             <!-- </form> -->
+            <c:if test="${empty login }">
+              <div class="box-body">
+                <div><a href="javascript:gologin();">Login Please</a></div>
+              </div>
+            </c:if>
           </div>
         </div>
 
@@ -147,6 +157,8 @@
         </div>
         
         <hr>
+        
+        <input type="hidden" id="loginUser" value="${login.uid}">
         
         <!-- Single Comment -->
         <div id="replies" style="display: none;">
@@ -204,6 +216,7 @@
               <input type="text" name="keyword" id="keywordInput" 
                 class="form-control" value="${cri.keyword }" placeholder="Search for...">
               <span class="input-group-btn">
+              	<input type="hidden" id="makeQuery" value="${pageMaker.makeQuery(1)}">
                 <button class="btn btn-secondary" type="button">Go!</button>
               </span>
              </div>

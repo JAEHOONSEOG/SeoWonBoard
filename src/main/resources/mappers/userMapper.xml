@@ -7,4 +7,13 @@
 	<select id="login" resultType="UserVO">
 		select uid, upw, uname from seowonhm.tsn_user where uid=#{uid} and upw=#{upw}
 	</select>
+	
+	<update id="keepLogin">
+		update seowonhm.tsn_user set sessionKey = #{sessionId}, sessionLimit = #{next}
+		where uid = #{uid} 
+	</update>
+	
+	<select id="checkUserWithSessionKey" resultType="UserVO">
+		select * from seowonhm.tsn_user where sessionKey = #{value} and sessionLimit > now()
+	</select>
 </mapper>

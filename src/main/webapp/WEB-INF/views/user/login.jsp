@@ -58,6 +58,12 @@
 						</button>
 					</div>
 
+					<div>
+						<label>
+							<input type="checkbox" name="useCookie">Remember Me
+						</label>
+					</div>
+
 					<div class="text-center p-t-45 p-b-4">
 						<span class="txt1">
 							Forgot

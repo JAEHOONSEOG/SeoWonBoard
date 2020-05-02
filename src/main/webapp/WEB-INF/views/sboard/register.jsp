@@ -92,7 +92,7 @@
           <hr>
           
           <h3 class="mt-4">writer</h3>
-          <input type="text" class="form-control" name="writer">
+          <input type="text" class="form-control" name="writer" value="${login.uid}">
           
           <hr>
           

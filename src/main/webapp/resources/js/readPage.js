@@ -44,6 +44,18 @@ $(document).ready(function(){
       formObj.attr("action", "/sboard/list");
       formObj.submit();
     });
+    
+    $(".btn-secondary").on("click", function(event){
+    	var makeQuery = $("#makeQuery").val();
+    	alert("Click btn-secondary of readpage");
+    	alert("makeQuery : " + makeQuery);
+		self.location = "list"
+			//+ "${pageMaker.makeQuery(1)}"
+			+ makeQuery
+            + "&searchType="
+            + $("select option:selected").val()
+            + "&keyword=" + $("#keywordInput").val();
+    });
 
     var replyPage = 1;
     
@@ -190,6 +202,7 @@ $(document).ready(function(){
 /* Comment Paging Process */
 function getPage(pageInfo){
 
+  var loginUser = $("#loginUser").val();
   $.getJSON(pageInfo, function(data){
 
     var str = "";
@@ -200,11 +213,15 @@ function getPage(pageInfo){
 			+ "<input type='hidden' id='comment-rno-" + this.rno + "' value='" + this.rno + "'>"
 			+ "<input type='hidden' id='comment-replytext-" + this.rno + "' value='" + this.replyText + "'>"
 			+ "</div>" 
-			+ "<div class='timeline-footer'>"
-			+ "<a class='btn btn-primary btn-sm' data-toggle='modal' data-target='#modifyModal' onclick='replyModify("
-			+ this.rno
-			+ ")'>Modify</a></div>"
-			+ "</div>"; 
+			+ "<div class='timeline-footer'>";
+			if(this.replyer == loginUser) {
+				str += "<a class='btn btn-primary btn-sm' data-toggle='modal' data-target='#modifyModal' onclick='replyModify("
+					+ this.rno
+					+ ")'>Modify</a>";
+			}
+				
+			str += "</div>"
+			+ "</div>";
     });
     $("#replies").html(str);
     

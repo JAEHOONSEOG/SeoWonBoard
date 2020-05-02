@@ -1,5 +1,9 @@
 package com.seowon.persistence;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -20,6 +24,23 @@ public class UserDAOImpl implements UserDAO {
 	public UserVO login(LoginDTO dto) throws Exception {
 		
 		return session.selectOne(namespace + ".login", dto);
+	}
+
+	@Override
+	public void keepLogin(String uid, String sessionId, Date next) throws Exception {
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("uid", uid);
+		paramMap.put("sessionId", sessionId);
+		paramMap.put("next", next);
+		
+		session.update(namespace + ".keepLogin", paramMap);
+	}
+
+	@Override
+	public UserVO checkUserWithSessionKey(String value) throws Exception {
+		
+		return session.selectOne(namespace + ".checkUserWithSessionKey", value);
 	}
 
 }
