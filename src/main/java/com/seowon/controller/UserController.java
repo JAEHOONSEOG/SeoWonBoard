@@ -70,5 +70,6 @@ public class UserController {
 			}
 			
 		}
+		response.sendRedirect("/user/login");
 	}
 }

@@ -47,10 +47,7 @@ $(document).ready(function(){
     
     $(".btn-secondary").on("click", function(event){
     	var makeQuery = $("#makeQuery").val();
-    	alert("Click btn-secondary of readpage");
-    	alert("makeQuery : " + makeQuery);
 		self.location = "list"
-			//+ "${pageMaker.makeQuery(1)}"
 			+ makeQuery
             + "&searchType="
             + $("select option:selected").val()

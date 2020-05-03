@@ -80,6 +80,8 @@ public class SearchBoardController {
 		pageMaker.setCri(cri);
 		
 		pageMaker.setTotalCount(service.listSearchCount(cri));
+		
+		model.addAttribute("pageMaker", pageMaker);
 	}
 	
 	@RequestMapping(value="/sboard/modifyPage", method=RequestMethod.GET)
