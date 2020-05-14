@@ -5,8 +5,8 @@
   
 <mapper namespace="com.seowon.mapper.BoardMapper">
   <insert id="create">
-    insert into seowonhm.tsn_board(title, content, writer)
-    values(#{title}, #{content}, #{writer})
+    insert into seowonhm.tsn_board(category, title, content, writer)
+    values(#{category}, #{title}, #{content}, #{writer})
   </insert>
   
   <insert id="addAttach">

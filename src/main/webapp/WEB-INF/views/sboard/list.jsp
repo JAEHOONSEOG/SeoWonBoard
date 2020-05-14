@@ -11,7 +11,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Blog Home - Start Bootstrap Template</title>
+  <title>Seowon StoreHouse</title>
 
   <!-- Bootstrap core JavaScript -->
   <script src="../../../resources/vendor/jquery/jquery.min.js"></script>
@@ -37,7 +37,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Start Bootstrap</a>
+      <a class="navbar-brand" href="#">Seowon StoreHouse</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -73,11 +73,13 @@
       <!-- Blog Entries Column -->
       <div class="col-md-8">
 
-        <h1 class="my-4">Page Heading
-          <small>Secondary Text</small>
-        </h1>
+        <h1 class="my-4">Mindcasting</h1>
 
         <c:forEach items="${list}" var="boardVO">
+          <!--*** Need update ***-->
+          <%-- <c:if test="${boardVO.category} == 'Mindcasting'">
+          </c:if> --%>
+          <!--*** Need update ***-->
           <!-- Blog Post -->
           <div class="card mb-4">
             <!-- <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap"> -->
@@ -184,7 +186,10 @@
               <div class="col-lg-6">
                 <ul class="list-unstyled mb-0">
                   <li>
-                    <a href="#">Web Design</a>
+                  	<a href="#">Mindcasting</a>
+                    <!-- *** Need Update *** -->
+                    <!-- <a href="/sboard/list?category=Mindcasting">Mindcasting</a> -->
+                    <!-- *** Need Update *** -->
                   </li>
                   <li>
                     <a href="#">HTML</a>
