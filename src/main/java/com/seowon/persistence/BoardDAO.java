@@ -35,4 +35,6 @@ public interface BoardDAO {
 	public void deleteAttach(Integer bno) throws Exception;
 	
 	public void replaceAttach(String fullName, Integer bno) throws Exception;
+	
+	public String getCategory(String category) throws Exception;
 }

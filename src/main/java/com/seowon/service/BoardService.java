@@ -28,4 +28,5 @@ public interface BoardService {
 	
 	public List<String> getAttach(Integer bno) throws Exception;
 	
+	public String getCategory(String category) throws Exception;
 }

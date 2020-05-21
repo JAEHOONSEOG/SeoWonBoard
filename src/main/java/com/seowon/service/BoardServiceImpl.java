@@ -90,4 +90,9 @@ public class BoardServiceImpl implements BoardService {
 	public List<String> getAttach(Integer bno) throws Exception {
 		return dao.getAttach(bno);
 	}
+
+	@Override
+	public String getCategory(String category) throws Exception {
+		return dao.getCategory(category);
+	}
 }

@@ -2,8 +2,17 @@ package com.seowon.domain;
 
 public class SearchCriteria extends Criteria {
 
+	private String category;
 	private String searchType;
 	private String keyword;
+	
+	public String getCategory() {
+		return category;
+	}
+	
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	
 	public String getSearchType() {
 		return searchType;
@@ -20,11 +29,10 @@ public class SearchCriteria extends Criteria {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "SerachCriteria [searchType=" + searchType + ", keyword=" + keyword + "]";
+		return "SearchCriteria [category=" + category + ", searchType=" + searchType + ", keyword=" + keyword + "]";
 	}
-	
 	
 }

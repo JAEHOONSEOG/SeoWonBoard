@@ -37,13 +37,13 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Seowon StoreHouse</a>
+      <a class="navbar-brand" href="/sboard/list?category=Mindcasting">Seowon StoreHouse</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <!-- <li class="nav-item active">
             <a class="nav-link" href="#">Home
               <span class="sr-only">(current)</span>
             </a>
@@ -56,8 +56,8 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Contact</a>
-          </li>
-          <li class="nav-item">
+          </li> -->
+          <li class="nav-item active">
             <a class="nav-link" href="/user/logout">Logout</a>
           </li>
         </ul>
@@ -73,7 +73,7 @@
       <!-- Blog Entries Column -->
       <div class="col-md-8">
 
-        <h1 class="my-4">Mindcasting</h1>
+        <h1 class="my-4" id="entry-header">${category}</h1>
 
         <c:forEach items="${list}" var="boardVO">
           <!--*** Need update ***-->
@@ -128,8 +128,8 @@
 
         <!-- Search Widget -->
         <div class="card my-4">
-          <h5 class="card-header">Search</h5>
-          <div class="card-body">
+          <h5 class="card-header" id="side-menu">Search</h5>
+          <div class="card-body" id="side-menu">
             <div class="input-group">
               <!-- Select options -->
               <select class="form-control" name="searchType">
@@ -180,19 +180,17 @@
 
         <!-- Categories Widget -->
         <div class="card my-4">
-          <h5 class="card-header">Categories</h5>
-          <div class="card-body">
+          <h5 class="card-header" id="side-menu">Categories</h5>
+          <div class="card-body" id="side-menu">
             <div class="row">
               <div class="col-lg-6">
                 <ul class="list-unstyled mb-0">
                   <li>
-                  	<a href="#">Mindcasting</a>
-                    <!-- *** Need Update *** -->
-                    <!-- <a href="/sboard/list?category=Mindcasting">Mindcasting</a> -->
-                    <!-- *** Need Update *** -->
+                  	<%-- <a href="/sboard/list${pageMaker.makeSearch(pageMaker.cri.page) }&category=Mindcasting">Mindcasting</a> --%>
+                  	<a href="/sboard/list?category=Mindcasting">Mindcasting</a>
                   </li>
                   <li>
-                    <a href="#">HTML</a>
+                    <a href="/sboard/list?category=ProSpring5">Pro Spring 5</a>
                   </li>
                   <li>
                     <a href="#">Freebies</a>
@@ -218,8 +216,8 @@
 
         <!-- Side Widget -->
         <div class="card my-4">
-          <h5 class="card-header">Side Widget</h5>
-          <div class="card-body">
+          <h5 class="card-header" id="side-menu">Side Widget</h5>
+          <div class="card-body" id="side-menu">
             You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
           </div>
         </div>

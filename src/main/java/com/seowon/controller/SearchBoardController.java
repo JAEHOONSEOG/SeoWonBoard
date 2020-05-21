@@ -1,6 +1,8 @@
 package com.seowon.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -36,6 +38,9 @@ public class SearchBoardController {
 			Model model) throws Exception {
 		
 		logger.info(cri.toString());
+		
+		//String category = service.getCategory(cri.getCategory());
+		model.addAttribute("category", service.getCategory(cri.getCategory()));
 		
 		//model.addAttribute("list", service.listCriteria(cri));
 		model.addAttribute("list", service.listSearchCriteria(cri));

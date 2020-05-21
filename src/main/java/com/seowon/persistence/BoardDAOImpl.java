@@ -98,4 +98,9 @@ public class BoardDAOImpl implements BoardDAO{
 		paramMap.put("bno", bno);
 		session.insert(namespace + ".replaceAttach", paramMap);
 	}
+
+	@Override
+	public String getCategory(String category) throws Exception {
+		return session.selectOne(namespace + ".getCategory", category);
+	}
 }

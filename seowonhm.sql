@@ -9,9 +9,18 @@ updatedate timestamp default now(),
 primary key(userid)
 );
 
+-- Category Table
+create table seowonhm.mst_category (
+ bno INT NOT NULL AUTO_INCREMENT,
+ category VARCHAR(255) NOT NULL,
+ regdate TIMESTAMP NOT NULL DEFAULT NOW(),
+ PRIMARY KEY(bno)
+);
+
 -- Board Table
 create table seowonhm.tsn_board (
  bno INT NOT NULL AUTO_INCREMENT,
+ category VARCHAR(255) NOT NULL,
  title VARCHAR(200) NOT NULL,
  content TEXT NULL,
  writer VARCHAR(50) NOT NULL,

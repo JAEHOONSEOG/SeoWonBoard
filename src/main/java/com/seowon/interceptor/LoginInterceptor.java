@@ -23,7 +23,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute(LOGIN) != null) {
-			logger.info("clear login datat before");
+			logger.info("clear login data before");
 			session.removeAttribute(LOGIN);
 		}
 		return true;
@@ -47,14 +47,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 				logger.info("remember me..............");
 				logger.info("session.getId : " + session.getId());
 				Cookie loginCookie = new Cookie("loginCookie", session.getId());
-				loginCookie.setPath("/sboard/list");
+				//loginCookie.setPath("/sboard/list");
+				loginCookie.setPath("/sboard/list?category=Mindcasting");
 				loginCookie.setMaxAge(60*60*24*7);
 				response.addCookie(loginCookie);
 			}
 			
 			Object dest = session.getAttribute("dest");
 
-			response.sendRedirect(dest != null ? (String)dest : "/sboard/list");
+			response.sendRedirect(dest != null ? (String)dest : "/sboard/list?category=Mindcasting");
 			
 		}
 	}

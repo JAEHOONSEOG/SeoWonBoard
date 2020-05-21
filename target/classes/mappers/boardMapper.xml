@@ -89,6 +89,17 @@
     ]]>
   </select>
   
+  <select id="getCategory" resultType="String">
+    <![CDATA[
+      select
+        category
+      from 
+        seowonhm.mst_category
+      where 
+        category = #{category}
+    ]]>
+  </select>
+  
   <select id="listSearch" resultType="BoardVO">
     <![CDATA[
       select
@@ -98,6 +109,12 @@
       where 
         bno > 0
     ]]>
+      <if test="category == 'Mindcasting'.toString()">
+        and category = #{category}
+      </if>
+      <if test="category == 'ProSpring5'.toString()">
+        and category = #{category}
+      </if>
     
     <include refid="search"></include>
     
