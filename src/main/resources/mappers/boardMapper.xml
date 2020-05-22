@@ -28,7 +28,7 @@
   
   <select id="read" resultType="BoardVO">
     select 
-      bno, title, content, writer, regdate, viewcnt
+      bno, category, title, content, writer, regdate, viewcnt
     from 
       seowonhm.tsn_board
     where bno = #{bno}

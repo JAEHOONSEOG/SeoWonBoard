@@ -76,10 +76,6 @@
         <h1 class="my-4" id="entry-header">${category}</h1>
 
         <c:forEach items="${list}" var="boardVO">
-          <!--*** Need update ***-->
-          <%-- <c:if test="${boardVO.category} == 'Mindcasting'">
-          </c:if> --%>
-          <!--*** Need update ***-->
           <!-- Blog Post -->
           <div class="card mb-4">
             <!-- <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap"> -->
@@ -87,7 +83,7 @@
               <h2 class="card-title">${boardVO.bno}.  ${boardVO.title}</h2>
               <p class="card-text">${boardVO.content}</p>
               <%-- <a href="/board/read?bno=${boardVO.bno}" class="btn btn-primary">Read More &rarr;</a> --%>
-              <a href="/sboard/readPage${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${boardVO.bno }"
+              <a href="/sboard/readPage${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${boardVO.bno }&category=${category}"
                class="btn btn-primary">Read More &rarr;</a>
             </div>
             <div class="card-footer text-muted">
@@ -173,7 +169,7 @@
               </span>
              </div>
              <div class="input-group"> 
-              <h7><a href="/sboard/register">New Article</a></h7>
+              <h7><a href="/sboard/register?category=${category}">New Article</a></h7>
             </div>
           </div>
         </div>
@@ -186,7 +182,6 @@
               <div class="col-lg-6">
                 <ul class="list-unstyled mb-0">
                   <li>
-                  	<%-- <a href="/sboard/list${pageMaker.makeSearch(pageMaker.cri.page) }&category=Mindcasting">Mindcasting</a> --%>
                   	<a href="/sboard/list?category=Mindcasting">Mindcasting</a>
                   </li>
                   <li>

@@ -39,7 +39,6 @@ public class SearchBoardController {
 		
 		logger.info(cri.toString());
 		
-		//String category = service.getCategory(cri.getCategory());
 		model.addAttribute("category", service.getCategory(cri.getCategory()));
 		
 		//model.addAttribute("list", service.listCriteria(cri));
@@ -55,8 +54,11 @@ public class SearchBoardController {
 	}
 
 	@RequestMapping(value="/register", method=RequestMethod.GET)
-	public void registerGET() throws Exception {
+	public void registerGET(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		logger.info("register get......");
+		logger.info("Get Category : " + cri.getCategory());
+		
+		model.addAttribute("category", cri.getCategory());
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
@@ -73,7 +75,7 @@ public class SearchBoardController {
 		
 		service.regist(board);
 		rttr.addFlashAttribute("msg", "success");
-		return "redirect:/sboard/list";
+		return "redirect:/sboard/list?category=" + board.getCategory();
 	}
 	
 	@RequestMapping(value="/readPage", method=RequestMethod.GET)
@@ -107,7 +109,7 @@ public class SearchBoardController {
 		rttr.addAttribute("searchType", cri.getSearchType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 		rttr.addFlashAttribute("msg", "success");
-		return "redirect:/sboard/list";
+		return "redirect:/sboard/list?category=" + board.getCategory();
 	}
 	
 	@RequestMapping(value="/removePage", method=RequestMethod.POST)

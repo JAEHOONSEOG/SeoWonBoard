@@ -37,13 +37,13 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Seowon StoreHouse</a>
+      <a class="navbar-brand" href="/sboard/list?category=Mindcasting">Seowon StoreHouse</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <!-- <li class="nav-item active">
             <a class="nav-link" href="#">Home
               <span class="sr-only">(current)</span>
             </a>
@@ -56,7 +56,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Contact</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="/user/logout">Logout</a>
           </li>
@@ -73,9 +73,6 @@
       <!-- Post Content Column -->
       <div class="col-lg-8">
 
-        <%-- <form role="form" method="post">
-          <input type="hidden" name="bno" value="${boardVO.bno}">
-        </form> --%>
         <input type="hidden" id="bno" name="bno" value="${boardVO.bno}">
         
         <!-- Title -->
@@ -119,6 +116,7 @@
           <input type="hidden" name="perPageNum" value="${cri.perPageNum }">
           <input type="hidden" name="searchType" value="${cri.searchType}">
           <input type="hidden" name="keyword" value="${cri.keyword }">
+          <input type="hidden" name="category" value="${boardVO.category }">
 		  
 		  <c:if test="${login.uid == boardVO.writer }">          
           	<button type="submit" class="btn btn-warning">Modify</button>
