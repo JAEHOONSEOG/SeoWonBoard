@@ -1,8 +1,6 @@
 package com.seowon.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -40,9 +38,21 @@ public class SearchBoardController {
 		logger.info(cri.toString());
 		
 		model.addAttribute("category", service.getCategory(cri.getCategory()));
+
+		// Get List
+		List<BoardVO> list = service.listSearchCriteria(cri);
+		for(BoardVO vo : list) {
+			// Edit Content
+			if(vo.getContent().length() > 300) {
+				String content = vo.getContent().substring(0, 299);
+				content = content + "....";
+				vo.setContent(content);
+			}
+		}
 		
 		//model.addAttribute("list", service.listCriteria(cri));
-		model.addAttribute("list", service.listSearchCriteria(cri));
+		//model.addAttribute("list", service.listSearchCriteria(cri));
+		model.addAttribute("list", list);
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
