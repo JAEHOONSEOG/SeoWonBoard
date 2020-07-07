@@ -115,6 +115,9 @@
       <if test="category == 'ProSpring5'.toString()">
         and category = #{category}
       </if>
+      <if test="category == 'Spring5DesignPattern'.toString()">
+        and category = #{category}
+      </if>
     
     <include refid="search"></include>
     

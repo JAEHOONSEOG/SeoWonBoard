@@ -35,35 +35,7 @@
 </head>
 <body>
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="/sboard/list?category=Mindcasting">Seowon StoreHouse</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <!-- <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li> -->
-          <li class="nav-item">
-            <a class="nav-link" href="/user/logout">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <jsp:include page="../com/navigation.jsp" />
 
   <!-- Page Content -->
   <div class="container">
@@ -173,125 +145,7 @@
       </div>
 
       <!-- Sidebar Widgets Column -->
-      <div class="col-md-4">
-
-        <!-- Search Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Search</h5>
-          <div class="card-body">
-            <div class="input-group">
-              <!-- Select options -->
-              <select class="form-control" name="searchType">
-                <!-- No search condition -->
-                <option value="n" <c:out value="${cri.searchType == null ? 'selected' : ''}"/>>
-                  Select Search Type...
-                </option>
-                <!-- search condition : title -->
-                <option value="t" <c:out value="${cri.searchType eq 't' ? 'selected' : '' }"/>>
-                  Title
-                </option>
-                <!-- search condition : content -->
-                <option value="c" <c:out value="${cri.searchType eq 'c' ? 'selected' : '' }"/>>
-                  Content
-                </option>
-                <!-- search condition : writer -->
-                <option value="w" <c:out value="${cri.searchType eq 'w' ? 'selected' : '' }"/>>
-                  Writer
-                </option>
-                <!-- search condition : title or content -->
-                <option value="tc" <c:out value="${cri.searchType eq 'tc' ? 'selected' : '' }"/>>
-                  Title or Content
-                </option>
-                <!-- search condition : content or writer -->
-                <option value="cw" <c:out value="${cri.searchType eq 'cw' ? 'selected' : '' }"/>>
-                  Content or  Writer 
-                </option>
-                <!-- search condition : title or content or writer -->
-                <option value="tcw" <c:out value="${cri.searchType eq 'tcw' ? 'selected' : '' }"/>>
-                  Title or Content or Writer
-                </option>
-              </select>
-              <!-- Select options -->
-            </div>
-            <div class="input-group">
-              <input type="text" name="keyword" id="keywordInput" 
-                class="form-control" value="${cri.keyword }" placeholder="Search for...">
-              <span class="input-group-btn">
-              	<input type="hidden" id="makeQuery" value="${pageMaker.makeQuery(1)}">
-                <button class="btn btn-secondary" type="button">Go!</button>
-              </span>
-             </div>
-             <div class="input-group"> 
-              <h7><a href="/sboard/register">New Article</a></h7>
-            </div>
-          </div>
-
-        <!-- Categories Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Categories</h5>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#">Mindcasting</a>
-                  </li>
-                  <li>
-                    <a href="#">HTML</a>
-                  </li>
-                  <li>
-                    <a href="#">Freebies</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#">JavaScript</a>
-                  </li>
-                  <li>
-                    <a href="#">CSS</a>
-                  </li>
-                  <li>
-                    <a href="#">Tutorials</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Side Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Side Widget</h5>
-          <div class="card-body">
-            You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-          </div>
-        </div>
-        
-        <!-- Modal -->
-        <div id="modifyModal" class="modal modal-primary fade" role="dialog">
-          <div class="modal-dialog">
-            <!-- Modal content -->
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title"></h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div>
-              <div class="modal-body" data-rno>
-                <p><input type="text" id="replytext" class="form-control"></p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-info" id="replyModBtn" data-dismiss="modal">Modify</button>
-                <button type="button" class="btn btn-secondary" id="replyDelBtn" data-dismiss="modal">Delete</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
+      <jsp:include page="../com/sideBar.jsp"/>
     <!-- /.row -->
 
   </div>
@@ -299,11 +153,6 @@
   <!-- /.container -->
 
   <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Seowon 2020</p>
-    </div>
-    <!-- /.container -->
-  </footer>
+  <jsp:include page="../com/footer.jsp"/>
 </body>
 </html>
