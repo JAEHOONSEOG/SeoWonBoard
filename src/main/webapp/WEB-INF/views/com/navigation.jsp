@@ -20,6 +20,9 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Contact</a>
         </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/calendar/calendar">Calendar</a>
+        </li>
         <li class="nav-item active">
           <a class="nav-link" href="/user/logout">Logout</a>
         </li>
