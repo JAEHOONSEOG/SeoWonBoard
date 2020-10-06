@@ -257,7 +257,7 @@ function replyModify(rno){
   
   $("#replytext").val($(ReplyTxtRno).val());
   $(".modal-title").html($(commentRno).val());
-  
+  $("#modalModify").modal("toggle");
 };
 
 function checkImageType(fileName) {

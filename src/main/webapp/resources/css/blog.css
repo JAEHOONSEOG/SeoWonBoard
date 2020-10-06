@@ -21,3 +21,17 @@ body {
 	max-height: 800px;
 	overflow: auto;
 }
+.modal{
+	position: fixed;
+    height: 500px;
+    width: 500px;
+    left: 50%;
+    top: 50%;
+    margin-left: -40px;
+    margin-right: -100px;
+}
+/* .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+} */
